@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-04 04:49:02
+/* Smarty version 5.7.0, created on 2026-02-05 06:37:22
   from 'file:showData.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_6982cfbea30a81_25476317',
+  'unifunc' => 'content_69843aa2a717b6_43960853',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd5ab0b15e38c751c8d5bac6207a0cc121ad25c1d' => 
+    '571e9668077f8f9737113871e81170c9b3814282' => 
     array (
       0 => 'showData.tpl',
-      1 => 1770180539,
+      1 => 1770273440,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6982cfbea30a81_25476317 (\Smarty\Template $_smarty_tpl) {
-$_smarty_current_dir = 'D:\\wamp64\\www\\ci-news\\app\\Views\\smarty';
+function content_69843aa2a717b6_43960853 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
 
@@ -88,7 +88,7 @@ js/data.js"><?php echo '</script'; ?>
         <a href="javascript:void(0);" class="btn btn-success mb-3 ms-3 text-decoration-none text-white"
           onclick='exportDataJS()'>Export <i class="fas fa-file-excel"></i></a>
         <form method="post" enctype="multipart/form-data" action="<?php echo $_smarty_tpl->getValue('base_url');?>
-/home/import-excel" id="importExcelForm">
+insertData/import-excel" id="importExcelForm">
           <label class="file-btn btn btn-warning mb-3 ms-3 text-white">
             Import <i class="fa-solid fa-file-import"></i>
             <input type="file" id="excelFile" name="excelFile" accept=".xls,.xlsx" style="display: none;"

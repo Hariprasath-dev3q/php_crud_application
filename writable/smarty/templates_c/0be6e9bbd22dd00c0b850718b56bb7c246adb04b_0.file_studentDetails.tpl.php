@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-04 04:49:02
-  from 'file:showData.tpl' */
+/* Smarty version 5.7.0, created on 2026-02-06 13:51:56
+  from 'file:studentDetails.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_6982cfbea30a81_25476317',
+  'unifunc' => 'content_6985f1fcda5d18_97358472',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd5ab0b15e38c751c8d5bac6207a0cc121ad25c1d' => 
+    '0be6e9bbd22dd00c0b850718b56bb7c246adb04b' => 
     array (
-      0 => 'showData.tpl',
-      1 => 1770180539,
+      0 => 'studentDetails.tpl',
+      1 => 1770382684,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6982cfbea30a81_25476317 (\Smarty\Template $_smarty_tpl) {
-$_smarty_current_dir = 'D:\\wamp64\\www\\ci-news\\app\\Views\\smarty';
+function content_6985f1fcda5d18_97358472 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
 
@@ -51,7 +51,7 @@ $_smarty_current_dir = 'D:\\wamp64\\www\\ci-news\\app\\Views\\smarty';
 >
   <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->getValue('base_url');?>
-js/data.js"><?php echo '</script'; ?>
+js/student-form.js"><?php echo '</script'; ?>
 >
 
   <style>
@@ -74,41 +74,30 @@ js/data.js"><?php echo '</script'; ?>
 
     .pagination {
       margin-top: 20px;
+
     }
   </style>
 </head>
 
 <body>
   <div class="container-fluid mt-3">
+    
     <div class="col-md-12 mb-3 d-flex justify-content-between">
       <div class="d-flex justify-content-start">
         <a href="<?php echo $_smarty_tpl->getValue('addUserUrl');?>
 " class="btn btn-primary mb-3 text-decoration-none text-white">Add User</a>
 
-        <a href="javascript:void(0);" class="btn btn-success mb-3 ms-3 text-decoration-none text-white"
-          onclick='exportDataJS()'>Export <i class="fas fa-file-excel"></i></a>
-        <form method="post" enctype="multipart/form-data" action="<?php echo $_smarty_tpl->getValue('base_url');?>
-/home/import-excel" id="importExcelForm">
-          <label class="file-btn btn btn-warning mb-3 ms-3 text-white">
-            Import <i class="fa-solid fa-file-import"></i>
-            <input type="file" id="excelFile" name="excelFile" accept=".xls,.xlsx" style="display: none;"
-              onchange=" if(confirm('Are you sure you want to import this file?')) return importDataJS(event)" />
-          </label>
-        </form>
-        <button class="btn btn-danger mb-3 ms-3" onclick="deleteAllUsers()">DeleteAll</button>
-      </div>
-      <div class="d-flex justify-content-end">
-
+              </div>
+      
       </div>
     </div>
 
     <table class="table border border-dark table-responsive">
       <thead class="table-success text-nowrap">
         <tr class="">
-          <th scope="col"><input type="checkbox" id="multiselect" /></th>
-          <th scope="col">S.No</th>
+                    <th scope="col">S.No</th>
           <th scope="col">Roll.No</th>
-          <th scope="col">F_Name</th>
+          <th scope="col">UserName</th>
           <th scope="col">Father</th>
           <th scope="col">DOB</th>
           <th scope="col">Mobile</th>
@@ -117,9 +106,11 @@ js/data.js"><?php echo '</script'; ?>
           <th scope="col">Gender</th>
           <th scope="col">Department</th>
           <th scope="col">Course</th>
-                    <th scope="col">City</th>
+          <th scope="col">File</th>
+          <th scope="col">City</th>
           <th scope="col">Address</th>
-                  </tr>
+          <th scope="col">Action</th>
+        </tr>
       </thead>
       <tbody class="text-nowrap">
         <?php if (( !$_smarty_tpl->hasVariable('items') || empty($_smarty_tpl->getValue('items')))) {?>
@@ -138,9 +129,7 @@ foreach ($_from ?? [] as $_smarty_tpl->getVariable('item')->value) {
 $foreach0DoElse = false;
 ?>
             <tr>
-              <td><input type="checkbox" value="<?php echo $_smarty_tpl->getValue('item')['id'];?>
-" /></td>
-              <td><?php echo $_smarty_tpl->getVariable('count')->postIncDec('++');?>
+                            <td><?php echo $_smarty_tpl->getVariable('count')->postIncDec('++');?>
 </td>
               <td><?php echo $_smarty_tpl->getValue('item')['rollNo'];?>
 </td>
@@ -163,11 +152,23 @@ $foreach0DoElse = false;
 </td>
               <td><?php echo $_smarty_tpl->getValue('item')['course'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->getValue('item')['city'];?>
+              <td><img src=<?php echo $_smarty_tpl->getValue('base_url');
+echo $_smarty_tpl->getValue('item')['file'];?>
+ alt="item Image"></td>
+              <td><?php echo $_smarty_tpl->getValue('item')['city'];?>
 </td>
               <td><?php echo $_smarty_tpl->getValue('item')['address'];?>
 </td>
-                          </tr>
+              <td>
+                <a href="<?php echo $_smarty_tpl->getValue('editUrl');?>
+/<?php echo $_smarty_tpl->getValue('item')['id'];?>
+" class="me-2"><i class="fa-solid fa-pen-to-square custom-edit-icon"></i></a>
+                <a href="javascript:void(0);" onclick="deleteOne('<?php echo $_smarty_tpl->getValue('item')['id'];?>
+','<?php echo $_smarty_tpl->getValue('item')['file'];?>
+')"><i
+                    class="fa-solid fa-trash custom-del-icon"></i></a>
+              </td>
+            </tr>
 
           <?php
 }

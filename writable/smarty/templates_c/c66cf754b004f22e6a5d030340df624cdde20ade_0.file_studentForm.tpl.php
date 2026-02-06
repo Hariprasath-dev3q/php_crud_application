@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-05 04:37:07
-  from 'file:home.tpl' */
+/* Smarty version 5.7.0, created on 2026-02-05 05:39:01
+  from 'file:studentForm.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_69841e7325a8b0_61478816',
+  'unifunc' => 'content_69842cf5143b05_53982874',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '04fc3917906035bdebdca1cd4b3e0933ccab0792' => 
+    'c66cf754b004f22e6a5d030340df624cdde20ade' => 
     array (
-      0 => 'home.tpl',
-      1 => 1770265659,
+      0 => 'studentForm.tpl',
+      1 => 1770269732,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_69841e7325a8b0_61478816 (\Smarty\Template $_smarty_tpl) {
+function content_69842cf5143b05_53982874 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'D:\\wamp64\\www\\ci-news\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>

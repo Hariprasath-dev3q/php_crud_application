@@ -19,7 +19,7 @@ class App extends BaseConfig
      * If empty, CodeIgniter will auto-detect the base URL from the current request.
      * This is useful when working with different ports or domains.
      */
-    public string $baseURL = 'http://localhost/ci-news/public/';
+    public string $baseURL = 'http://localhost/student-crud/public/';
     //public array $baseURL = ['media.example.com', 'accounts.example.com'];
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

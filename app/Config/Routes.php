@@ -7,19 +7,26 @@ use App\Controllers\Home;
  * @var RouteCollection $routes
  */
 
-// $routes->get('/home', 'Home::index');
-// $routes->post('home/save-items', 'Home::saveItems');
-// $routes->get('display', 'Home::getItems');
-// $routes->get('home/(:num)', "Home::editItem/$1");
-// $routes->get('delete-item/(:num)', "Home::deleteItem/$1");
 
 
-$routes->group('home', function ($routes) {
-    $routes->get('/', 'Home::index');
-    $routes->post('save-items', 'Home::saveItems');
-    $routes->get('display', 'Home::getItems');
-    $routes->get('(:num)', 'Home::editItem/$1');
-    $routes->post('delete-item', 'Home::deleteItem');
+$routes->group('studentform', function ($routes) {
+    $routes->get('/', 'StudentForm::index');
+    $routes->post('save-items', 'StudentForm::saveItems');
+    $routes->get('display', 'StudentForm::getItems');
+    $routes->get('(:num)', 'StudentForm::editItem/$1');
+    $routes->post('delete-item', 'StudentForm::deleteItem');
 });
 
-$routes->post('export-excel', 'Home::exportData');
+$routes->group('insertData', function ($routes) {
+    $routes->get('display', 'InsertData::displayStudentDetails');
+    $routes->post('import-excel', 'InsertData::importExcel');
+    $routes->post('export-excel', 'InsertData::exportData');
+    $routes->post('sample-excel', 'InsertData::sampleExcel');
+    $routes->post('delete-multiple', 'InsertData::deleteMultiple');
+});
+
+
+
+
+
+// $routes->get('news/import-json', 'Home::importJson');

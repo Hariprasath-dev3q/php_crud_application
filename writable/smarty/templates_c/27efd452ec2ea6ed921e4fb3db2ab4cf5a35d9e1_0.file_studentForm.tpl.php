@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-05 04:37:07
-  from 'file:home.tpl' */
+/* Smarty version 5.7.0, created on 2026-02-05 07:39:52
+  from 'file:studentForm.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_69841e7325a8b0_61478816',
+  'unifunc' => 'content_69844948f33313_75918281',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '04fc3917906035bdebdca1cd4b3e0933ccab0792' => 
+    '27efd452ec2ea6ed921e4fb3db2ab4cf5a35d9e1' => 
     array (
-      0 => 'home.tpl',
-      1 => 1770265659,
+      0 => 'studentForm.tpl',
+      1 => 1770277041,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_69841e7325a8b0_61478816 (\Smarty\Template $_smarty_tpl) {
-$_smarty_current_dir = 'D:\\wamp64\\www\\ci-news\\app\\Views\\smarty';
+function content_69844948f33313_75918281 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
 <?php
@@ -44,7 +44,7 @@ $_smarty_tpl->configLoad("config.tpl", null);
 >
   <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->getValue('base_url');?>
-js/data.js"><?php echo '</script'; ?>
+js/student-form.js"><?php echo '</script'; ?>
 >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
