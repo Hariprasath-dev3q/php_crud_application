@@ -15,8 +15,6 @@
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script>
     var base_url='{$base_url}';
@@ -46,12 +44,7 @@
 
     }
 
-    /* .my-alert-height {
-      height: 40px !important;
-      line-height: 40px !important;
-      padding: 0px 35px !important;
-      margin-left: 0 !important;
-    } */
+   
   </style>
 </head>
 
@@ -119,7 +112,7 @@
             <td colspan="15" class="text-center">{$no_data}</td>
           </tr>
         {else}
-          {* <pre>{$items|@print_r}</pre> *}
+          
           {assign var="itemsPerPage" value=50}
           {assign var="currentPage" value=$pager->getCurrentPage()}
           {assign var="count" value=($currentPage - 1) * $itemsPerPage + 1}
@@ -153,7 +146,7 @@
         {$pager->links('default', 'custom')}
       {/if}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    
 </body>
 
 </html>

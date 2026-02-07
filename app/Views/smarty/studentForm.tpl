@@ -21,27 +21,32 @@
     .error {
       color: #ff0000;
     }
-    .customImg{
+
+    .customImg {
       position: relative;
     }
-    .customBtn{
-      position:relative;
+
+    .customBtn {
+      position: relative;
       bottom: 45px;
-      right:25px;
+      right: 25px;
     }
-    .customEyeBtn{
-      background:none;
-      border:none;
-      position:relative
+
+    .customEyeBtn {
+      background: none;
+      border: none;
+      position: relative
     }
-    .customEye{
-      position:absolute;
-      bottom:30px;
-      left:230px
+
+    .customEye {
+      position: absolute;
+      bottom: 30px;
+      left: 230px
     }
-    .customEye:hover{
-      color:grey;
-      
+
+    .customEye:hover {
+      color: grey;
+
     }
   </style>
 </head>
@@ -57,8 +62,8 @@
           <label for="rollNo" class="form-label">Roll no : </label>
         </div>
         <div class="col-8">
-          <input type="text" id='rollno' name="rollno" class="form-control" maxlength="15"
-            value="{$item.rollNo|default:''}" required>
+          <input type="text" id='rollno' name="rollno" class="form-control" maxlength="15" value="{$item.rollNo}"
+            required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -67,11 +72,11 @@
         </div>
         <div class="col">
           <input type="text" id="fname" name="fname" class="ms-0 form-control" placeholder="firstname" maxlength="10"
-            value="{$item.fname|default:''}" required>
+            value="{$item.fname}" required>
         </div>
         <div class="col">
           <input type="text" id="lname" name="lname" class="form-control" placeholder="lastname" maxlength="10"
-            value="{$item.lname|default:''}" required>
+            value="{$item.lname}" required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -80,7 +85,7 @@
         </div>
         <div class="col-8">
           <input type="text" class="form-control" id="fatherName" name="fatherName" maxlength="20"
-            value="{$item.father_name|default:''}" required>
+            value="{$item.father_name}" required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -88,8 +93,7 @@
           <label for="dateOfBirth" class="form-label">Date of birth : </label>
         </div>
         <div class="col-8">
-          <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{$item.dob|default:''}"
-            required>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{$item.dob}" required>
         </div>
       </div>
 
@@ -99,7 +103,7 @@
         </div>
         <div class="col-8">
           <input type="tel" id="mobileNumber" name="mobileNumber" class="form-control" maxlength="10"
-            value="{$item.mobile|default:''}" required>
+            value="{$item.mobile}" required>
           <p><span id="errorMobile"></span></p>
         </div>
       </div>
@@ -109,7 +113,7 @@
         </div>
         <div class="col-8">
           <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-            value="{$item.email|default:''}" maxlength="25" required>
+            value="{$item.email}" maxlength="25" required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -118,8 +122,8 @@
         </div>
         <div class="col-8">
           <input type="password" class="form-control" id="password" name="password" maxlength="8"
-            value="{$item.password|default:''}" required>
-            <button class="customEyeBtn"><i class="fa-solid fa-eye customEye" ></i></button>
+            value="{$item.password}" required>
+          <button class="customEyeBtn"><i class="fa-solid fa-eye customEye"></i></button>
         </div>
       </div>
       <div class="mb-3 row">
@@ -209,7 +213,7 @@
           <input type="file" id="studentPic" name="studentPic" class="form-control form-control-sm mt-3"
             {if empty($item.file)}required{/if}>
 
-          <input type="hidden" id="old_file" name="old_file" value="{$item.file|default:''}">
+          <input type="hidden" id="old_file" name="old_file" value="{$item.file}">
         </div>
 
       </div>
@@ -218,8 +222,8 @@
           <label for="city" class="form-label">City : </label>
         </div>
         <div class="col-8">
-          <input type="text" name="city" class="ms-0 form-control" id="city" maxlength="20"
-            value="{$item.city|default:''}" required>
+          <input type="text" name="city" class="ms-0 form-control" id="city" maxlength="20" value="{$item.city}"
+            required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -228,12 +232,12 @@
         </div>
         <div class="col-8">
           <textarea name="address" spellcheck="false" id="address" class="form-control" maxlength="50"
-            required>{$item.address|default:''} </textarea>
+            required>{$item.address} </textarea>
         </div>
       </div>
 
-      <input type="hidden" name="edit_id" id="edit_id" value="{$item.id|default:''}">
-     
+      <input type="hidden" name="edit_id" id="edit_id" value="{$item.id}">
+
 
       <div class="d-flex justify-content-end">
         <div id="feedback" class="text-center w-75 "></div>

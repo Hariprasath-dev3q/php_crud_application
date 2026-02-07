@@ -62,34 +62,6 @@ class StudentDetailsModel extends Model
             ->delete();
     }
 
-
-    /**
-     * Helper method for INSERT-SELECT queries
-     */
-    // public function customInsertBatch($set = null, ?bool $escape = null, int $batchSize = 100)
-    // {
-
-    //     if (isset($this->QBOptions['setQueryAsData'])) {
-    //         $sql = $this->_insertBatch($this->QBFrom[0], $this->QBKeys, []);
-
-    //         if (!$sql) return false;
-
-    //         if (!$this->testMode) {
-    //             $this->db->query($sql);
-    //         }
-
-    //         $this->resetWrite();
-
-    //         return $this->testMode ? $sql : $this->db->affectedRows();
-    //     }
-
-
-    //     if (!empty($set)) {
-    //         $this->setData($set, $escape);
-    //     }
-
-    //     return $this->batchExecute('_insertBatch', $batchSize);
-    // }
     public function insertItem($data)
     {
 

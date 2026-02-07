@@ -52,16 +52,7 @@
       <div class="d-flex justify-content-start">
         <a href="{$addUserUrl}" class="btn btn-primary mb-3 text-decoration-none text-white">Add User</a>
 
-        {* <a href="javascript:void(0);" class="btn btn-success mb-3 ms-3 text-decoration-none text-white"
-          onclick='exportDataJS()'>Export <i class="fas fa-file-excel"></i></a>
-        <form method="post" enctype="multipart/form-data" action="{$base_url}insertData/import-excel" id="importExcelForm">
-          <label class="file-btn btn btn-warning mb-3 ms-3 text-white">
-            Import <i class="fa-solid fa-file-import"></i>
-            <input type="file" id="excelFile" name="excelFile" accept=".xls,.xlsx" style="display: none;"
-              onchange=" if(confirm('Are you sure you want to import this file?')) return importDataJS(event)" />
-          </label>
-        </form>
-        <button class="btn btn-danger mb-3 ms-3" onclick="deleteAllUsers()">DeleteAll</button> *}
+        
       </div>
       
       </div>
@@ -70,7 +61,7 @@
     <table class="table border border-dark table-responsive">
       <thead class="table-success text-nowrap">
         <tr class="">
-          {* <th scope="col"><input type="checkbox" id="multiselect" /></th> *}
+          
           <th scope="col">S.No</th>
           <th scope="col">Roll.No</th>
           <th scope="col">UserName</th>
@@ -99,7 +90,7 @@
           {assign var="count" value=($currentPage - 1) * $itemsPerPage + 1}
           {foreach $items as $item}
             <tr>
-              {* <td><input type="checkbox" value="{$item.id}" /></td> *}
+             
               <td>{$count++}</td>
               <td>{$item.rollNo}</td>
               <td>{$item.fname} {$item.lname}</td>

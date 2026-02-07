@@ -6,6 +6,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Libraries\RedisManager;
 
 /**
  * BaseController provides a convenient place for loading components
@@ -30,16 +31,23 @@ abstract class BaseController extends Controller
     /**
      * @return void
      */
+
+    protected $fileCache;
+    protected $redisCache;
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
-        // Load here all helpers you want to be available in your controllers that extend BaseController.
-        // Caution: Do not put the this below the parent::initController() call below.
-        // $this->helpers = ['form', 'url'];
 
-        // Caution: Do not edit this line.
         parent::initController($request, $response, $logger);
-
-        // Preload any models, libraries, etc, here.
-        // $this->session = service('session');
+        $config = new \Config\Cache();
+        //$this->redisCache = service('predis');
+        $config->handler = 'predis';
+        $this->redisCache = \Config\Services::cache($config, false);
+        $this->fileCache = $this->handled();
+    }
+    public function handled(string $handler = 'file')
+    {
+        $config = new \Config\Cache();
+        $config->handler = $handler;
+        return \Config\Services::cache($config, false);
     }
 }

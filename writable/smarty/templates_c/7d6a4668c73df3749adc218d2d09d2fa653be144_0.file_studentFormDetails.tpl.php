@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-06 13:45:32
+/* Smarty version 5.7.0, created on 2026-02-07 11:24:41
   from 'file:studentFormDetails.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_6985f07c19f262_57934365',
+  'unifunc' => 'content_698720f981d951_12464386',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7d6a4668c73df3749adc218d2d09d2fa653be144' => 
     array (
       0 => 'studentFormDetails.tpl',
-      1 => 1770385528,
+      1 => 1770462563,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6985f07c19f262_57934365 (\Smarty\Template $_smarty_tpl) {
+function content_698720f981d951_12464386 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
@@ -40,8 +40,6 @@ $_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
   <?php echo '<script'; ?>
  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"><?php echo '</script'; ?>
@@ -80,12 +78,7 @@ js/student-form.js"><?php echo '</script'; ?>
 
     }
 
-    /* .my-alert-height {
-      height: 40px !important;
-      line-height: 40px !important;
-      padding: 0px 35px !important;
-      margin-left: 0 !important;
-    } */
+   
   </style>
 </head>
 
@@ -157,7 +150,8 @@ insertData/import-excel"
 </td>
           </tr>
         <?php } else { ?>
-                    <?php $_smarty_tpl->assign('itemsPerPage', 50, false, NULL);?>
+          
+          <?php $_smarty_tpl->assign('itemsPerPage', 50, false, NULL);?>
           <?php $_smarty_tpl->assign('currentPage', $_smarty_tpl->getValue('pager')->getCurrentPage(), false, NULL);?>
           <?php $_smarty_tpl->assign('count', ($_smarty_tpl->getValue('currentPage')-1)*$_smarty_tpl->getValue('itemsPerPage')+1, false, NULL);?>
 
@@ -212,9 +206,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 
       <?php }?>
     </div>
-    <?php echo '<script'; ?>
- src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"><?php echo '</script'; ?>
->
+    
 </body>
 
 </html><?php }

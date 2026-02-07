@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-06 13:51:56
+/* Smarty version 5.7.0, created on 2026-02-07 11:05:41
   from 'file:studentDetails.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_6985f1fcda5d18_97358472',
+  'unifunc' => 'content_69871c850d2e71_10688413',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0be6e9bbd22dd00c0b850718b56bb7c246adb04b' => 
     array (
       0 => 'studentDetails.tpl',
-      1 => 1770382684,
+      1 => 1770461689,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6985f1fcda5d18_97358472 (\Smarty\Template $_smarty_tpl) {
+function content_69871c850d2e71_10688413 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
@@ -87,7 +87,8 @@ js/student-form.js"><?php echo '</script'; ?>
         <a href="<?php echo $_smarty_tpl->getValue('addUserUrl');?>
 " class="btn btn-primary mb-3 text-decoration-none text-white">Add User</a>
 
-              </div>
+        
+      </div>
       
       </div>
     </div>
@@ -95,7 +96,8 @@ js/student-form.js"><?php echo '</script'; ?>
     <table class="table border border-dark table-responsive">
       <thead class="table-success text-nowrap">
         <tr class="">
-                    <th scope="col">S.No</th>
+          
+          <th scope="col">S.No</th>
           <th scope="col">Roll.No</th>
           <th scope="col">UserName</th>
           <th scope="col">Father</th>
@@ -129,7 +131,8 @@ foreach ($_from ?? [] as $_smarty_tpl->getVariable('item')->value) {
 $foreach0DoElse = false;
 ?>
             <tr>
-                            <td><?php echo $_smarty_tpl->getVariable('count')->postIncDec('++');?>
+             
+              <td><?php echo $_smarty_tpl->getVariable('count')->postIncDec('++');?>
 </td>
               <td><?php echo $_smarty_tpl->getValue('item')['rollNo'];?>
 </td>

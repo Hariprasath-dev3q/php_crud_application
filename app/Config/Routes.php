@@ -24,9 +24,4 @@ $routes->group('insertData', function ($routes) {
     $routes->post('sample-excel', 'InsertData::sampleExcel');
     $routes->post('delete-multiple', 'InsertData::deleteMultiple');
 });
-
-
-
-
-
-// $routes->get('news/import-json', 'Home::importJson');
+$routes->get('news/import-json', 'InsertData::importJson');

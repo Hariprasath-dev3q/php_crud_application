@@ -21,7 +21,7 @@ class Cache extends BaseConfig
      * The name of the preferred handler that should be used. If for some reason
      * it is not available, the $backupHandler will be used in its place.
      */
-    public string $handler = 'predis';
+    public string $handler = 'file';
 
     /**
      * --------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class Cache extends BaseConfig
      * unreachable. Often, 'file' is used here since the filesystem is
      * always available, though that's not always practical for the app.
      */
-    public string $backupHandler = 'file';
+    public string $backupHandler = 'dummy';
 
     /**
      * --------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class Cache extends BaseConfig
      *
      * NOTE: The default set is required for PSR-6 compliance.
      */
-    public string $reservedCharacters = '{}()/\@';
+    public string $reservedCharacters = '{}()/\@:';
 
     /**
      * --------------------------------------------------------------------------
@@ -80,10 +80,12 @@ class Cache extends BaseConfig
      *
      * @var array{storePath?: string, mode?: int}
      */
+
     public array $file = [
-        'storePath' => WRITEPATH . 'cache/',
+        'storePath' => 'D:/wamp64/www/student-crud/writable/cache/',
         'mode'      => 0640,
     ];
+
 
     /**
      * -------------------------------------------------------------------------
@@ -159,28 +161,4 @@ class Cache extends BaseConfig
      * @var bool|list<string>
      */
     public $cacheQueryString = false;
-
-    public function __construct(){
-        parent::__construct();
-
-        $this->handler = env('cache.handler', 'file');
-        
-        $this->prefix = env('cache.prefix', '');
-
-        $this->redis = [
-            'host' => env('cache.redis.host', '127.0.0.1'),
-            'password' => env('cache.redis.password', null),
-            'port' => env('cache.redis.port', 6379),
-            'timeout' => env('cache.redis.timeout',0),
-            'database' => env('cache.redis.database',0) 
-        ];
-
-        $this->file = [
-            'cache' => env('cache.file.storePath', WRITEPATH . 'cache/'),
-            'mode' => 0650,
-        ];
-
-        $this->backupHandler = $this->handler === 'predis' ? 'file' : 'dummy';
-
-    }
 }

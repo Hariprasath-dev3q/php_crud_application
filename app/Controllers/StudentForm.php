@@ -13,7 +13,7 @@ use App\Libraries\RedisManager;
 
 class StudentForm extends BaseController
 {
-    protected StudentFormModel $database;
+    protected StudentFormModel $StudentFormModel;
     protected $smarty;
     protected $message;
     protected $redis;
@@ -21,15 +21,12 @@ class StudentForm extends BaseController
 
     public function __construct()
     {
-        $this->database = new StudentFormModel();
+        $this->StudentFormModel = new StudentFormModel();
         $this->smarty = new Smarty();
         $this->message = new stdClass();
         $this->message->status = 0;
         $this->smarty->assign('base_url', base_url());
         $this->smarty->assign('no_data', "No Data Found!");
-        $this->redis = new RedisManager();
-        //dd(is_file(APPPATH . 'Views/Pager/custom_pager.php'));
-
     }
 
     public function index()
@@ -55,92 +52,7 @@ class StudentForm extends BaseController
         return $this->smarty->display('studentForm.tpl');
     }
 
-    // public function importExcel()
-    // {
-    //     $file = $this->request->getFile('excelFile');
-    //     if (!$file || !$file->isValid() || $file->getName() === '') {
-    //         return redirect()->back()->with('error', 'No file uploaded or file is invalid');
-    //     }
-    //     $extension = $file->getClientExtension();
-    //     $data = [];
-    //     try {
-    //         $spreadsheet = IOFactory::load($file->getTempName());
-    //     } catch (\Exception $e) {
-    //         if (!in_array($extension, ['xls', 'xlsx'])) {
-    //             return redirect()->back()->with('error', 'Invalid file format: ' . $e->getMessage());
-    //         }
-    //     }
-    //     $sheetData = $spreadsheet->getActiveSheet()->toArray();
-    //     foreach ($sheetData as $key => $row) {
-    //         if ($key == 0) continue;
-    //         //if (empty($row[0])) continue;
-    //         $data[] = [
-    //             'rollNo' => $row[0],
-    //             'fname' => $row[1],
-    //             'lname' => $row[2],
-    //             'father_name' => $row[3],
-    //             'dob' => $row[4],
-    //             'mobile' => $row[5],
-    //             'email' => $row[6],
-    //             'password' => $this->encryptText($row[7]),
-    //             'gender' => $row[8],
-    //             'department' => $row[9],
-    //             'course' => $row[10],
-    //             'city' => $row[11],
-    //             'address' => $row[12],
-    //         ];
-    //     }
-    //     // print_r($data);
-    //     // exit;
-    //     $page = $this->request->getGet('page') ?? 1;
-    //     if (!empty($data)) {
-    //         $this->redis->flushAll();
-    //         $this->redis->delete('user', 'page_' . $page);
-    //         $this->redis->clearNamespace('user');
-    //         $this->database->insertBatch($data);
-    //     }
-    //     return redirect()->to('studentform/display')->with('success', 'Data imported successfully');
-    // }
-
-    // public function deleteMultiple()
-    // {
-    //     $ids = $this->request->getVar('ids');
-    //     if (empty($ids) || !is_array($ids)) {
-    //         return $this->response->setJSON([
-    //             'status' => 0,
-    //             'message' => 'No IDs provided'
-    //         ]);
-    //     }
-
-    //     foreach ($ids as $id) {
-    //         $this->database->deleteItemById($id);
-    //     }
-
-    //     return $this->response->setJSON([
-    //         'status' => 1,
-    //         'message' => 'Selected records deleted successfully'
-    //     ]);
-    // }
-
-    public function importJson()
-    {
-        $service = new \App\Services\ImportService();
-        $path = ROOTPATH . 'public/generated_data.json';
-
-        if (! file_exists($path)) {
-            return $this->response->setJSON([
-                'status'  => false,
-                'message' => 'JSON file not found'
-            ]);
-        }
-
-        $service->importFromJson($path);
-
-        return $this->response->setJSON([
-            'status'  => true,
-            'message' => 'Data imported successfully'
-        ]);
-    }
+    
 
 
     public function deleteItem()
@@ -152,7 +64,10 @@ class StudentForm extends BaseController
         if (!empty($photo) && file_exists($imagePath)) {
             unlink($imagePath);
         }
-        $this->database->deleteItemById($id);
+        $this->StudentFormModel->deleteItemById($id);
+
+        $this->fileCache->delete('student_list');
+
         return $this->response->setJSON([
             'status' => 1,
             'message' => 'Record deleted successfully'
@@ -163,27 +78,24 @@ class StudentForm extends BaseController
     {
         $this->smarty->assign('addUserUrl', url_to('StudentForm::index'));
         $this->smarty->assign('editUrl', url_to('StudentForm::index'));
-        // $page = $this->request->getGet('page') ?? 1;
 
-        // $data = $this->redis->get('user', 'page_' . $page);
-        // if (!$data) {
-        //     $data = $this->database->getAllItems();
-        //     $this->redis->set('user', 'page_' . $page, $data);
-            
-        // }
-         $data = $this->database->getAllItems();
+        $data = $this->fileCache->get('student_list');
 
+        if ($data === null) {
+
+            $data = $this->StudentFormModel->getAllItems();
+            $this->fileCache->save('student_list', $data, 3600);
+        }
 
         $this->smarty->assign('items', $data['items']);
         $this->smarty->assign('pager', $data['pager']);
 
-        // $this->smarty->assign('total', $total);  
         return $this->smarty->display('studentDetails.tpl');
     }
 
     public function editItem($id)
     {
-        $item = $this->database->getItemById($id);
+        $item = $this->StudentFormModel->getItemById($id);
 
         if (!$item) {
             throw PageNotFoundException::forPageNotFound();
@@ -299,9 +211,8 @@ class StudentForm extends BaseController
                     }
                 }
             }
-            //echo $fileName;
+
             $oldFile = $this->old_file ?? null;
-            //echo $oldFile;
 
             // Check if it's an update or insert
             if (!empty($json->editId)) {
@@ -333,15 +244,15 @@ class StudentForm extends BaseController
                     $updateData['file'] = $oldFile;
                 }
 
-                $this->database->updateItemById($json->editId, $updateData);
-
+                $this->StudentFormModel->updateItemById($json->editId, $updateData);
+                $this->fileCache->delete('student_list');
                 return $this->response->setJSON([
                     'status' => 1,
                     'message' => 'Record updated successfully'
                 ]);
             } else {
                 // Insert new record
-                $this->database->insertItem([
+                $this->StudentFormModel->insertItem([
                     'rollNo'      => $data['studentRollNo'],
                     'fname'       => $data['studentFirstName'],
                     'lname'       => $data['studentLastName'],
@@ -358,6 +269,7 @@ class StudentForm extends BaseController
                     'address'     => $data['address'],
                 ]);
 
+                $this->fileCache->delete('student_list');
                 return $this->response->setJSON([
                     'status' => 1,
                     'message' => 'Student registered successfully'
@@ -370,5 +282,4 @@ class StudentForm extends BaseController
             ]);
         }
     }
-
 }

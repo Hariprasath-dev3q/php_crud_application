@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-05 07:39:52
+/* Smarty version 5.7.0, created on 2026-02-07 11:04:57
   from 'file:studentForm.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_69844948f33313_75918281',
+  'unifunc' => 'content_69871c597ca363_92285840',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '27efd452ec2ea6ed921e4fb3db2ab4cf5a35d9e1' => 
     array (
       0 => 'studentForm.tpl',
-      1 => 1770277041,
+      1 => 1770462286,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_69844948f33313_75918281 (\Smarty\Template $_smarty_tpl) {
+function content_69871c597ca363_92285840 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
@@ -56,27 +56,32 @@ js/student-form.js"><?php echo '</script'; ?>
     .error {
       color: #ff0000;
     }
-    .customImg{
+
+    .customImg {
       position: relative;
     }
-    .customBtn{
-      position:relative;
+
+    .customBtn {
+      position: relative;
       bottom: 45px;
-      right:25px;
+      right: 25px;
     }
-    .customEyeBtn{
-      background:none;
-      border:none;
-      position:relative
+
+    .customEyeBtn {
+      background: none;
+      border: none;
+      position: relative
     }
-    .customEye{
-      position:absolute;
-      bottom:30px;
-      left:230px
+
+    .customEye {
+      position: absolute;
+      bottom: 30px;
+      left: 230px
     }
-    .customEye:hover{
-      color:grey;
-      
+
+    .customEye:hover {
+      color: grey;
+
     }
   </style>
 </head>
@@ -92,9 +97,9 @@ js/student-form.js"><?php echo '</script'; ?>
           <label for="rollNo" class="form-label">Roll no : </label>
         </div>
         <div class="col-8">
-          <input type="text" id='rollno' name="rollno" class="form-control" maxlength="15"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['rollNo'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-" required>
+          <input type="text" id='rollno' name="rollno" class="form-control" maxlength="15" value="<?php echo $_smarty_tpl->getValue('item')['rollNo'];?>
+"
+            required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -103,12 +108,12 @@ js/student-form.js"><?php echo '</script'; ?>
         </div>
         <div class="col">
           <input type="text" id="fname" name="fname" class="ms-0 form-control" placeholder="firstname" maxlength="10"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['fname'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            value="<?php echo $_smarty_tpl->getValue('item')['fname'];?>
 " required>
         </div>
         <div class="col">
           <input type="text" id="lname" name="lname" class="form-control" placeholder="lastname" maxlength="10"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['lname'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            value="<?php echo $_smarty_tpl->getValue('item')['lname'];?>
 " required>
         </div>
       </div>
@@ -118,7 +123,7 @@ js/student-form.js"><?php echo '</script'; ?>
         </div>
         <div class="col-8">
           <input type="text" class="form-control" id="fatherName" name="fatherName" maxlength="20"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['father_name'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            value="<?php echo $_smarty_tpl->getValue('item')['father_name'];?>
 " required>
         </div>
       </div>
@@ -127,9 +132,8 @@ js/student-form.js"><?php echo '</script'; ?>
           <label for="dateOfBirth" class="form-label">Date of birth : </label>
         </div>
         <div class="col-8">
-          <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['dob'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-"
-            required>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="<?php echo $_smarty_tpl->getValue('item')['dob'];?>
+" required>
         </div>
       </div>
 
@@ -139,7 +143,7 @@ js/student-form.js"><?php echo '</script'; ?>
         </div>
         <div class="col-8">
           <input type="tel" id="mobileNumber" name="mobileNumber" class="form-control" maxlength="10"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['mobile'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            value="<?php echo $_smarty_tpl->getValue('item')['mobile'];?>
 " required>
           <p><span id="errorMobile"></span></p>
         </div>
@@ -150,7 +154,7 @@ js/student-form.js"><?php echo '</script'; ?>
         </div>
         <div class="col-8">
           <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['email'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            value="<?php echo $_smarty_tpl->getValue('item')['email'];?>
 " maxlength="25" required>
         </div>
       </div>
@@ -160,9 +164,9 @@ js/student-form.js"><?php echo '</script'; ?>
         </div>
         <div class="col-8">
           <input type="password" class="form-control" id="password" name="password" maxlength="8"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['password'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            value="<?php echo $_smarty_tpl->getValue('item')['password'];?>
 " required>
-            <button class="customEyeBtn"><i class="fa-solid fa-eye customEye" ></i></button>
+          <button class="customEyeBtn"><i class="fa-solid fa-eye customEye"></i></button>
         </div>
       </div>
       <div class="mb-3 row">
@@ -254,7 +258,7 @@ echo $_smarty_tpl->getValue('item')['file'];
           <input type="file" id="studentPic" name="studentPic" class="form-control form-control-sm mt-3"
             <?php if (( !true || empty($_smarty_tpl->getValue('item')['file']))) {?>required<?php }?>>
 
-          <input type="hidden" id="old_file" name="old_file" value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['file'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+          <input type="hidden" id="old_file" name="old_file" value="<?php echo $_smarty_tpl->getValue('item')['file'];?>
 ">
         </div>
 
@@ -264,9 +268,9 @@ echo $_smarty_tpl->getValue('item')['file'];
           <label for="city" class="form-label">City : </label>
         </div>
         <div class="col-8">
-          <input type="text" name="city" class="ms-0 form-control" id="city" maxlength="20"
-            value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['city'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-" required>
+          <input type="text" name="city" class="ms-0 form-control" id="city" maxlength="20" value="<?php echo $_smarty_tpl->getValue('item')['city'];?>
+"
+            required>
         </div>
       </div>
       <div class="mb-3 row">
@@ -275,14 +279,14 @@ echo $_smarty_tpl->getValue('item')['file'];
         </div>
         <div class="col-8">
           <textarea name="address" spellcheck="false" id="address" class="form-control" maxlength="50"
-            required><?php echo (($tmp = $_smarty_tpl->getValue('item')['address'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+            required><?php echo $_smarty_tpl->getValue('item')['address'];?>
  </textarea>
         </div>
       </div>
 
-      <input type="hidden" name="edit_id" id="edit_id" value="<?php echo (($tmp = $_smarty_tpl->getValue('item')['id'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+      <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $_smarty_tpl->getValue('item')['id'];?>
 ">
-     
+
 
       <div class="d-flex justify-content-end">
         <div id="feedback" class="text-center w-75 "></div>

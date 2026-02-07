@@ -70,11 +70,11 @@ async function submitData(e) {
       reader.onerror = reject;
     });
 
-  let base64Img = "";
-  const fileInput = $("#studentPic")[0];
-  if (fileInput.files.length) {
-    base64Img = await convertToBase64(fileInput.files[0]);
-  }
+    let base64Img = "";
+    const fileInput = $("#studentPic")[0];
+    if (fileInput.files.length) {
+      base64Img = await convertToBase64(fileInput.files[0]);
+    }
 
   const data = {
     studentRollNo: $("#rollno").val(),

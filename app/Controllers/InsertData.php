@@ -17,20 +17,17 @@ use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 
 class InsertData extends BaseController
 {
-  protected $redis;
   protected $model;
   protected $studentForm;
   protected $smarty;
   public function __construct()
   {
-    $this->redis = new RedisManager();
+
     $this->model = new StudentDetailsModel();
     $this->studentForm = new StudentForm();
     $this->smarty = new Smarty();
     $this->smarty->assign('base_url', base_url());
     $this->smarty->assign('no_data', "No Data Found!");
-    // echo get_class(\Config\Services::cache());
-    // die;
   }
   public function validateDob($dob)
   {
@@ -38,7 +35,6 @@ class InsertData extends BaseController
     if ($dob === null || $dob === '') {
       return null;
     }
-
 
     if (is_numeric($dob)) {
       try {
@@ -105,7 +101,6 @@ class InsertData extends BaseController
     unset($sheetData[0]);
 
     $data = [];
-    $page = $this->request->getVar('page') ?? 1;
 
     $requiredFields = [
       'ROLL NO',
@@ -194,10 +189,8 @@ class InsertData extends BaseController
     }
 
     try {
-      $this->redis->flushAll();
-      $this->redis->delete('user', 'page_' . $page);
       $this->model->insertItem($data);
-      $this->redis->clearNamespace('user_');
+      $this->redisCache->clean();
 
       return redirect()->to('insertData/display')
         ->with('success', count($data) . ' record(s) imported successfully');
@@ -208,68 +201,15 @@ class InsertData extends BaseController
 
   public function sampleExcel()
   {
-    $fileName = 'sample-excel-' . date('Ymd_His') . '.xlsx';
-
-    $spreadsheet = new Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet();
-
-
-    $headers = [
-      'ROLL NO',
-      'FIRST NAME',
-      'LAST NAME',
-      'FATHER NAME',
-      'DOB',
-      'MOBILE',
-      'EMAIL',
-      'PASSWORD',
-      'GENDER',
-      'DEPARTMENT',
-      'COURSE',
-      'CITY',
-      'ADDRESS'
-    ];
-
-    $sheet->fromArray($headers, null, 'A1');
-
-
-    $lastColumn = $sheet->getHighestColumn();
-
-
-    $sheet->getStyle("A1:{$lastColumn}1")->applyFromArray([
-      'font' => [
-        'bold' => true
-      ],
-      'fill' => [
-        'fillType' => Fill::FILL_SOLID,
-        'startColor' => [
-          'rgb' => 'C6EFCE'
-        ]
-      ],
-      'alignment' => [
-        'horizontal' => Alignment::HORIZONTAL_CENTER,
-        'vertical' => Alignment::VERTICAL_CENTER
-      ],
-      'borders' => [
-        'allBorders' => [
-          'borderStyle' => Border::BORDER_THIN,
-          'color' => ['rgb' => '000000']
-        ]
-      ]
-    ]);
-
-
-    foreach (range('A', $lastColumn) as $col) {
-      $sheet->getColumnDimension($col)->setAutoSize(true);
+    $filePath = WRITEPATH . 'exports/sample-excel.xlsx';
+    if (!file_exists($filePath)) {
+      return json_encode([
+        'status' => 0,
+        'message' => 'File not exist!',
+      ]);
     }
-
-
-    $writer = new Xlsx($spreadsheet);
-    $tempFile = WRITEPATH . 'exports/' . $fileName;
-    $writer->save($tempFile);
-
-    return $this->response->download($tempFile, null)
-      ->setFileName($fileName);
+    return $this->response->download($filePath, null)
+      ->setFileName('Sample.xlsx');
   }
 
   public function exportData()
@@ -366,7 +306,7 @@ class InsertData extends BaseController
   public function deleteMultiple()
   {
     $ids = $this->request->getVar('ids');
-
+    $page = $this->request->getGet('page') ?? 1;
     if (empty($ids) || !is_array($ids)) {
       return $this->response->setJSON([
         'status' => 0,
@@ -375,8 +315,9 @@ class InsertData extends BaseController
     }
 
     $this->model->deleteByIds($ids);
-
-    $this->redis->clearNamespace('user');
+    $key = 'user_page_' . $page;
+    $this->redisCache->delete($key);
+    $this->redisCache->clean();
 
     return $this->response->setJSON([
       'status' => 1,
@@ -384,23 +325,48 @@ class InsertData extends BaseController
     ]);
   }
 
+
+
   public function displayStudentDetails()
   {
     $page = $this->request->getGet('page') ?? 1;
 
-    $data = $this->redis->get('user', 'page_' . $page);
+    $key = 'user_page_' . $page;
+
+    $data = $this->redisCache->get($key);
+
     if (!$data) {
       $data = $this->model->getAllItems();
-      $this->redis->set('user', 'page_' . $page, $data);
+      $this->redisCache->save($key, $data, 3600);
     }
 
     $this->smarty->assign('items', $data['items']);
     $this->smarty->assign('pager', $data['pager']);
-    
+
     $session = session();
     $this->smarty->assign('error', $session->getFlashdata('error'));
     $this->smarty->assign('success', $session->getFlashdata('success'));
 
     return $this->smarty->display('studentFormDetails.tpl');
+  }
+
+  public function importJson()
+  {
+    $service = new \App\Services\ImportService();
+    $path = ROOTPATH . 'public/generated.json';
+
+    if (! file_exists($path)) {
+      return $this->response->setJSON([
+        'status'  => false,
+        'message' => 'JSON file not found'
+      ]);
+    }
+
+    $service->importFromJson($path);
+
+    return $this->response->setJSON([
+      'status'  => true,
+      'message' => 'Data imported successfully'
+    ]);
   }
 }
