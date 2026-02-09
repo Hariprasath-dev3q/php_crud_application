@@ -1,26 +1,27 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-09 09:58:35
+/* Smarty version 5.7.0, created on 2026-02-09 12:52:36
   from 'file:studentFormDetails.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_6989afcbd1c4b5_38305160',
+  'unifunc' => 'content_6989d894e2d906_40019706',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7d6a4668c73df3749adc218d2d09d2fa653be144' => 
     array (
       0 => 'studentFormDetails.tpl',
-      1 => 1770631093,
+      1 => 1770641531,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:studentFormDetails_partial.tpl' => 1,
   ),
 ))) {
-function content_6989afcbd1c4b5_38305160 (\Smarty\Template $_smarty_tpl) {
+function content_6989d894e2d906_40019706 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
@@ -146,131 +147,14 @@ insertData/import-excel"
         <?php }?>
       </div>
     </div>
-
-    <table class="table border border-dark table-responsive">
-      <thead class="table-success text-nowrap">
-        <tr class="">
-          <th scope="col"><input type="checkbox" id="multiselect" /></th>
-          <th scope="col">S.No</th>
-          <th scope="col">ROLL NO</th>
-          <th scope="col">USER NAME</th>
-          <th scope="col">FATHER</th>
-          <th scope="col">DOB</th>
-          <th scope="col">MOBILE</th>
-          <th scope="col">EMAIL</th>
-          <th scope="col">PASSWORD</th>
-          <th scope="col">GENDER</th>
-          <th scope="col">DEPARTMENT</th>
-          <th scope="col">COURSE</th>
-          <th scope="col">CITY</th>
-          <th scope="col">ADDRESS</th>
-        </tr>
-      </thead>
-      <tbody class="text-nowrap">
-        <?php if (( !$_smarty_tpl->hasVariable('items') || empty($_smarty_tpl->getValue('items')))) {?>
-          <tr>
-            <td colspan="15" class="text-center"><?php echo $_smarty_tpl->getValue('no_data');?>
-</td>
-          </tr>
-        <?php } else { ?>
-
-          <?php $_smarty_tpl->assign('itemsPerPage', 50, false, NULL);?>
-          <?php $_smarty_tpl->assign('count', ($_smarty_tpl->getValue('currentPage')-1)*$_smarty_tpl->getValue('itemsPerPage')+1, false, NULL);?>
-
-
-          <?php
-$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('items'), 'item');
-$foreach0DoElse = true;
-foreach ($_from ?? [] as $_smarty_tpl->getVariable('item')->value) {
-$foreach0DoElse = false;
+    <div id="student-container">
+      <?php $_smarty_tpl->renderSubTemplate('file:studentFormDetails_partial.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 ?>
-            <tr>
-              <td><input type="checkbox" value="<?php echo $_smarty_tpl->getValue('item')['id'];?>
-" /></td>
-              <td><?php echo $_smarty_tpl->getVariable('count')->postIncDec('++');?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['rollNo'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['fname'];?>
- <?php echo $_smarty_tpl->getValue('item')['lname'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['father_name'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['dob'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['mobile'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['email'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['password'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['gender'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['department'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['course'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['city'];?>
-</td>
-              <td><?php echo $_smarty_tpl->getValue('item')['address'];?>
-</td>
-            </tr>
-
-          <?php
-}
-$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
-        <?php }?>
-      </tbody>
-    </table>
-
-    
-    <?php if ($_smarty_tpl->getValue('totalPages') > 1) {?>
-      <div class="pagination-wrapper">
-        
-        <?php if ($_smarty_tpl->getValue('currentPage') > 1) {?>
-          <a class="page-btn" href="?page=<?php echo $_smarty_tpl->getValue('currentPage')-1;?>
-">&#10094;</a>
-        <?php }?>
-        
-        <a class="page-btn <?php if ($_smarty_tpl->getValue('currentPage') == 1) {?>active<?php }?>" href="?page=1">1</a>
-
-        <?php if ($_smarty_tpl->getValue('currentPage') > 4) {?>
-          <span class="dots">...</span>
-        <?php }?>
-
-        <?php
-$_smarty_tpl->assign('i', null);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? $_smarty_tpl->getValue('currentPage')+1+1 - ($_smarty_tpl->getValue('currentPage')-1) : $_smarty_tpl->getValue('currentPage')-1-($_smarty_tpl->getValue('currentPage')+1)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
-if ($_smarty_tpl->tpl_vars['i']->total > 0) {
-for ($_smarty_tpl->tpl_vars['i']->value = $_smarty_tpl->getValue('currentPage')-1, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
-$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration === $_smarty_tpl->tpl_vars['i']->total;?>
-          <?php if ($_smarty_tpl->getValue('i') > 1 && $_smarty_tpl->getValue('i') < $_smarty_tpl->getValue('totalPages')) {?>
-            <a class="page-btn <?php if ($_smarty_tpl->getValue('i') == $_smarty_tpl->getValue('currentPage')) {?>active<?php }?>" href="?page=<?php echo $_smarty_tpl->getValue('i');?>
-"><?php echo $_smarty_tpl->getValue('i');?>
-</a>
-          <?php }?>
-        <?php }
-}
-?>
-
-        <?php if ($_smarty_tpl->getValue('currentPage') < $_smarty_tpl->getValue('totalPages')-3) {?>
-          <span class="dots">...</span>
-        <?php }?>
-
-        <?php if ($_smarty_tpl->getValue('totalPages') > 1) {?>
-          <a class="page-btn <?php if ($_smarty_tpl->getValue('currentPage') == $_smarty_tpl->getValue('totalPages')) {?>active<?php }?>" href="?page=<?php echo $_smarty_tpl->getValue('totalPages');?>
-"><?php echo $_smarty_tpl->getValue('totalPages');?>
-</a>
-        <?php }?>
-
-        <?php if ($_smarty_tpl->getValue('currentPage') < $_smarty_tpl->getValue('totalPages')) {?>
-          <a class="page-btn" href="?page=<?php echo $_smarty_tpl->getValue('currentPage')+1;?>
-">&#10095;</a>
-        <?php }?>
-
-      </div>
-    <?php }?>
+    </div>
 
 </body>
 
-</html><?php }
+</html>
+
+<?php }
 }

@@ -70,11 +70,11 @@ async function submitData(e) {
       reader.onerror = reject;
     });
 
-    let base64Img = "";
-    const fileInput = $("#studentPic")[0];
-    if (fileInput.files.length) {
-      base64Img = await convertToBase64(fileInput.files[0]);
-    }
+  let base64Img = "";
+  const fileInput = $("#studentPic")[0];
+  if (fileInput.files.length) {
+    base64Img = await convertToBase64(fileInput.files[0]);
+  }
 
   const data = {
     studentRollNo: $("#rollno").val(),
@@ -233,12 +233,14 @@ function deleteAllUsers() {
 
 $(document).ready(() => {
   setTimeout(function () {
-      $(".myAlert")
-        .fadeTo(500, 0)
-        .slideUp(500, function () {
-          $(this).remove();
-        });
-    }, 1500);
+    $(".myAlert")
+      .fadeTo(500, 0)
+      .slideUp(500, function () {
+        $(this).remove();
+      });
+  }, 1500);
+
+  // console.log("js is loaded");
 
   $("#mobileNumber").keydown(function (e) {
     var key = e.keyCode;
@@ -257,6 +259,7 @@ $(document).ready(() => {
   $("#studentPic").on("change", function () {
     onChangeImage(this);
   });
+
   function onChangeImage(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -290,5 +293,33 @@ $(document).ready(() => {
   });
   $(".customEyeBtn").on("mouseleave", function () {
     $("#password").attr("type", "password");
+  });
+
+  $(document).on("click", ".ajax-page", function (e) {
+    e.preventDefault();
+    console.log("Page link clicked");
+    let index = $(this).data("index");
+    var data = {};
+    data.page = index;
+    $("#student-container").html(`<div class='text-center p-3'>
+        <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+      </button>
+      </div>`);
+    $.ajax({
+      url: base_url + "insertData/display",
+      method: "GET",
+      data: data,
+      success: function (response) {
+        $("#student-container").html(response);
+      },
+      error: function (err) {
+        console.error("Pagination error:", err);
+        $("#student-container").html(
+          "<div class='alert alert-danger'>Error loading page</div>",
+        );
+      },
+    });
   });
 });

@@ -74,10 +74,11 @@ class StudentForm extends BaseController
 
     public function getItems()
     {
+        $page = $this->request->getVar('page') ?? 1;
         $this->smarty->assign('addUserUrl', url_to('StudentForm::index'));
         $this->smarty->assign('editUrl', url_to('StudentForm::index'));
         $data = $this->fileCache->get('student_list');
-        $page = $this->request->getVar('page') ?? 1;
+        
         if ($data === null) {
 
             $data = $this->StudentFormModel->getAllItems();

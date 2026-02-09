@@ -348,6 +348,10 @@ class InsertData extends BaseController
     $this->smarty->assign('error', $session->getFlashdata('error'));
     $this->smarty->assign('success', $session->getFlashdata('success'));
 
+    if($this->request->isAJAX()){
+      return $this->smarty->display('studentFormDetails_partial.tpl');
+    }
+
     return $this->smarty->display('studentFormDetails.tpl');
   }
 
