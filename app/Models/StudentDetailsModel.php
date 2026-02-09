@@ -17,6 +17,7 @@ class StudentDetailsModel extends Model
             ->get()
             ->getResultArray();
     }
+
     public function countAllItems()
     {
         $result = $this->db->query("Select COUNT(*) as count from studentdetails");
@@ -26,7 +27,7 @@ class StudentDetailsModel extends Model
 
     public function getItemsPaginated($page)
     {
-        $perPage = 50;
+        $perPage = 20;
         $offset = ($page - 1) * $perPage;
 
         $items = $this->db->query("Select * from studentdetails ORDER BY id ASC LIMIT $perPage OFFSET $offset");
@@ -39,9 +40,11 @@ class StudentDetailsModel extends Model
             'items' => $items,
             'totalPages' => $totalPages,
             'currentPage' => $page,
+
         ];
     }
 
+    // simple way to fetch 50 datas per page
     public function getAllItems()
     {
 
@@ -65,7 +68,7 @@ class StudentDetailsModel extends Model
     public function insertItem($data)
     {
 
-        if(empty($data)){
+        if (empty($data)) {
             return false;
         }
         return $this->insertBatch($data);

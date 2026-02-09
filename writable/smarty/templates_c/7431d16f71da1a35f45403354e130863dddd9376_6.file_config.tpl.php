@@ -1,13 +1,13 @@
-<?php /* Smarty version 5.7.0, created on 2026-01-27 05:24:58
+<?php /* Smarty version 5.7.0, created on 2026-02-09 09:39:16
          compiled from 'file:config.tpl' */ ?>
 <?php
-/* Smarty version 5.7.0, created on 2026-01-27 05:24:58
+/* Smarty version 5.7.0, created on 2026-02-09 09:39:16
   from 'file:config.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_69784c2a3799f5_56622489',
+  'unifunc' => 'content_6989ab44ac8557_42301062',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -22,8 +22,8 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_69784c2a3799f5_56622489 (\Smarty\Template $_smarty_tpl) {
-$_smarty_current_dir = 'C:\\wamp64\\www\\ci-news\\app\\Config\\smarty';
+function content_6989ab44ac8557_42301062 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Config\\smarty';
 $_smarty_tpl->parent->assignConfigVars(array (
   'sections' => 
   array (

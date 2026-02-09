@@ -39,12 +39,35 @@
       width: 150px;
     }
 
-    .pagination {
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
       margin-top: 20px;
-
     }
 
-   
+    .page-btn {
+      padding: 10px 16px;
+      margin: 0 4px;
+      border: 1px solid #ddd;
+      text-decoration: none;
+      color: #333;
+      border-radius: 6px;
+      background: #f8f8f8;
+      transition: 0.2s;
+    }
+
+    .page-btn:hover {
+      background: #e2e2e2;
+    }
+
+    .page-btn.active {
+      background: #cfd3db;
+      font-weight: bold;
+    }
+
+    .dots {
+      padding: 10px 12px;
+    }
   </style>
 </head>
 
@@ -73,7 +96,7 @@
       </div>
       <div class="d-flex justify-content-end w-50">
         {if $error}
-          <div class="alert alert-danger alert-dismissible fade show myAlert w-50"  role="alert">
+          <div class="alert alert-danger alert-dismissible fade show myAlert w-50" role="alert">
             {$error}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
@@ -112,10 +135,10 @@
             <td colspan="15" class="text-center">{$no_data}</td>
           </tr>
         {else}
-          
+
           {assign var="itemsPerPage" value=50}
-          {assign var="currentPage" value=$pager->getCurrentPage()}
           {assign var="count" value=($currentPage - 1) * $itemsPerPage + 1}
+
 
           {foreach $items as $item}
             <tr>
@@ -140,13 +163,47 @@
       </tbody>
     </table>
 
-    {* Pagination Links *}
+    {* Pagination Links
     <div class="pagination">
       {if isset($pager)}
         {$pager->links('default', 'custom')}
       {/if}
-    </div>
-    
+    </div> *}
+
+    {if $totalPages > 1}
+      <div class="pagination-wrapper">
+        
+        {if $currentPage > 1}
+          <a class="page-btn" href="?page={$currentPage-1}">&#10094;</a>
+        {/if}
+        
+        <a class="page-btn {if $currentPage == 1}active{/if}" href="?page=1">1</a>
+
+        {if $currentPage > 4}
+          <span class="dots">...</span>
+        {/if}
+
+        {for $i=$currentPage-1 to $currentPage+1}
+          {if $i > 1 && $i < $totalPages}
+            <a class="page-btn {if $i == $currentPage}active{/if}" href="?page={$i}">{$i}</a>
+          {/if}
+        {/for}
+
+        {if $currentPage < $totalPages-3}
+          <span class="dots">...</span>
+        {/if}
+
+        {if $totalPages > 1}
+          <a class="page-btn {if $currentPage == $totalPages}active{/if}" href="?page={$totalPages}">{$totalPages}</a>
+        {/if}
+
+        {if $currentPage < $totalPages}
+          <a class="page-btn" href="?page={$currentPage+1}">&#10095;</a>
+        {/if}
+
+      </div>
+    {/if}
+
 </body>
 
 </html>

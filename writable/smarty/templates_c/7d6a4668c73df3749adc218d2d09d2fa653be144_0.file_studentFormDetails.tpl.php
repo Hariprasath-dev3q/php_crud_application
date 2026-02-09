@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-07 11:24:41
+/* Smarty version 5.7.0, created on 2026-02-09 09:58:35
   from 'file:studentFormDetails.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_698720f981d951_12464386',
+  'unifunc' => 'content_6989afcbd1c4b5_38305160',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7d6a4668c73df3749adc218d2d09d2fa653be144' => 
     array (
       0 => 'studentFormDetails.tpl',
-      1 => 1770462563,
+      1 => 1770631093,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_698720f981d951_12464386 (\Smarty\Template $_smarty_tpl) {
+function content_6989afcbd1c4b5_38305160 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'D:\\wamp64\\www\\student-crud\\app\\Views\\smarty';
 ?><!DOCTYPE html>
 <html>
@@ -73,12 +73,35 @@ js/student-form.js"><?php echo '</script'; ?>
       width: 150px;
     }
 
-    .pagination {
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
       margin-top: 20px;
-
     }
 
-   
+    .page-btn {
+      padding: 10px 16px;
+      margin: 0 4px;
+      border: 1px solid #ddd;
+      text-decoration: none;
+      color: #333;
+      border-radius: 6px;
+      background: #f8f8f8;
+      transition: 0.2s;
+    }
+
+    .page-btn:hover {
+      background: #e2e2e2;
+    }
+
+    .page-btn.active {
+      background: #cfd3db;
+      font-weight: bold;
+    }
+
+    .dots {
+      padding: 10px 12px;
+    }
   </style>
 </head>
 
@@ -108,7 +131,7 @@ insertData/import-excel"
       </div>
       <div class="d-flex justify-content-end w-50">
         <?php if ($_smarty_tpl->getValue('error')) {?>
-          <div class="alert alert-danger alert-dismissible fade show myAlert w-50"  role="alert">
+          <div class="alert alert-danger alert-dismissible fade show myAlert w-50" role="alert">
             <?php echo $_smarty_tpl->getValue('error');?>
 
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -150,10 +173,10 @@ insertData/import-excel"
 </td>
           </tr>
         <?php } else { ?>
-          
+
           <?php $_smarty_tpl->assign('itemsPerPage', 50, false, NULL);?>
-          <?php $_smarty_tpl->assign('currentPage', $_smarty_tpl->getValue('pager')->getCurrentPage(), false, NULL);?>
           <?php $_smarty_tpl->assign('count', ($_smarty_tpl->getValue('currentPage')-1)*$_smarty_tpl->getValue('itemsPerPage')+1, false, NULL);?>
+
 
           <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('items'), 'item');
@@ -200,13 +223,53 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
       </tbody>
     </table>
 
-        <div class="pagination">
-      <?php if ((true && ($_smarty_tpl->hasVariable('pager') && null !== ($_smarty_tpl->getValue('pager') ?? null)))) {?>
-        <?php echo $_smarty_tpl->getValue('pager')->links('default','custom');?>
-
-      <?php }?>
-    </div>
     
+    <?php if ($_smarty_tpl->getValue('totalPages') > 1) {?>
+      <div class="pagination-wrapper">
+        
+        <?php if ($_smarty_tpl->getValue('currentPage') > 1) {?>
+          <a class="page-btn" href="?page=<?php echo $_smarty_tpl->getValue('currentPage')-1;?>
+">&#10094;</a>
+        <?php }?>
+        
+        <a class="page-btn <?php if ($_smarty_tpl->getValue('currentPage') == 1) {?>active<?php }?>" href="?page=1">1</a>
+
+        <?php if ($_smarty_tpl->getValue('currentPage') > 4) {?>
+          <span class="dots">...</span>
+        <?php }?>
+
+        <?php
+$_smarty_tpl->assign('i', null);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? $_smarty_tpl->getValue('currentPage')+1+1 - ($_smarty_tpl->getValue('currentPage')-1) : $_smarty_tpl->getValue('currentPage')-1-($_smarty_tpl->getValue('currentPage')+1)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = $_smarty_tpl->getValue('currentPage')-1, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration === $_smarty_tpl->tpl_vars['i']->total;?>
+          <?php if ($_smarty_tpl->getValue('i') > 1 && $_smarty_tpl->getValue('i') < $_smarty_tpl->getValue('totalPages')) {?>
+            <a class="page-btn <?php if ($_smarty_tpl->getValue('i') == $_smarty_tpl->getValue('currentPage')) {?>active<?php }?>" href="?page=<?php echo $_smarty_tpl->getValue('i');?>
+"><?php echo $_smarty_tpl->getValue('i');?>
+</a>
+          <?php }?>
+        <?php }
+}
+?>
+
+        <?php if ($_smarty_tpl->getValue('currentPage') < $_smarty_tpl->getValue('totalPages')-3) {?>
+          <span class="dots">...</span>
+        <?php }?>
+
+        <?php if ($_smarty_tpl->getValue('totalPages') > 1) {?>
+          <a class="page-btn <?php if ($_smarty_tpl->getValue('currentPage') == $_smarty_tpl->getValue('totalPages')) {?>active<?php }?>" href="?page=<?php echo $_smarty_tpl->getValue('totalPages');?>
+"><?php echo $_smarty_tpl->getValue('totalPages');?>
+</a>
+        <?php }?>
+
+        <?php if ($_smarty_tpl->getValue('currentPage') < $_smarty_tpl->getValue('totalPages')) {?>
+          <a class="page-btn" href="?page=<?php echo $_smarty_tpl->getValue('currentPage')+1;?>
+">&#10095;</a>
+        <?php }?>
+
+      </div>
+    <?php }?>
+
 </body>
 
 </html><?php }

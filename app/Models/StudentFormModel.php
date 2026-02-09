@@ -17,11 +17,11 @@ class StudentFormModel extends Model
     }
 
     public function getAllItems()
-    {   
-       
+    {
+
         return [
             'items' => $this->orderBy('id', 'ASC')
-                ->paginate(50),
+                ->paginate(4),
             'pager' => $this->pager,
         ];
     }
@@ -47,5 +47,4 @@ class StudentFormModel extends Model
             ->insert($data);
         return $result;
     }
-
 }

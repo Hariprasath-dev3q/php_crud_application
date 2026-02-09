@@ -336,12 +336,13 @@ class InsertData extends BaseController
     $data = $this->redisCache->get($key);
 
     if (!$data) {
-      $data = $this->model->getAllItems();
+      $data = $this->model->getItemsPaginated($page);
       $this->redisCache->save($key, $data, 3600);
     }
 
     $this->smarty->assign('items', $data['items']);
-    $this->smarty->assign('pager', $data['pager']);
+    $this->smarty->assign('totalPages', $data['totalPages']);
+    $this->smarty->assign('currentPage', $data['currentPage']);
 
     $session = session();
     $this->smarty->assign('error', $session->getFlashdata('error'));

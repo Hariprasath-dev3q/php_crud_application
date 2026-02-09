@@ -52,12 +52,10 @@ class StudentForm extends BaseController
         return $this->smarty->display('studentForm.tpl');
     }
 
-    
-
-
     public function deleteItem()
     {
         $id = $this->request->getVar('id');
+        $page = $this->request->getVar('page') ?? 1;
         $photo = $this->request->getVar('photoUrl');
 
         $imagePath = FCPATH . $photo;
@@ -66,7 +64,7 @@ class StudentForm extends BaseController
         }
         $this->StudentFormModel->deleteItemById($id);
 
-        $this->fileCache->delete('student_list');
+        $this->fileCache->delete('student_list'.$page);
 
         return $this->response->setJSON([
             'status' => 1,
@@ -78,15 +76,14 @@ class StudentForm extends BaseController
     {
         $this->smarty->assign('addUserUrl', url_to('StudentForm::index'));
         $this->smarty->assign('editUrl', url_to('StudentForm::index'));
-
         $data = $this->fileCache->get('student_list');
-
+        $page = $this->request->getVar('page') ?? 1;
         if ($data === null) {
 
             $data = $this->StudentFormModel->getAllItems();
-            $this->fileCache->save('student_list', $data, 3600);
+            $this->fileCache->save('student_list'.$page, $data, 3600);
         }
-
+        //$data = $this->StudentFormModel->getAllItems();
         $this->smarty->assign('items', $data['items']);
         $this->smarty->assign('pager', $data['pager']);
 
